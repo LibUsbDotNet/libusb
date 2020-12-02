@@ -26,16 +26,13 @@ jobs:
       copy x64\Release\dll\libusb-1.0.pdb %BUILD_ARTIFACTSTAGINGDIRECTORY%\runtimes\win-x64\native
     displayName: 'Copy artifacts'
 
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-      artifactName: 'drop' 
-      publishLocation: 'Container'
+  - publish: '$(Build.ArtifactStagingDirectory)'
+    artifact: windows
     displayName: 'Publish libusb-1.0.dll artifacts'
 
 - job: macos
   pool:
-    vmImage: 'xcode9-macos10.13'
+    vmImage: 'macos-10.15'
   steps:
   - script: |
       brew install autoconf automake libtool pkg-config libusb libzip
@@ -52,5 +49,5 @@ jobs:
     displayName: 'Copy artifacts'
 
   - publish: '$(Build.ArtifactStagingDirectory)'
-    artifact: drop
+    artifact: macos
     displayName: 'Publish libusb-1.0.0.dylib artifacts'
