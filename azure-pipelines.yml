@@ -51,9 +51,6 @@ jobs:
       cp Xcode/build/Release/libusb-1.0.0.dylib $BUILD_ARTIFACTSTAGINGDIRECTORY/runtimes/osx-x64/native
     displayName: 'Copy artifacts'
 
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-      artifactName: 'drop' 
-      publishLocation: 'Container'
+  - publish: '$(Build.ArtifactStagingDirectory)'
+    artifact: drop
     displayName: 'Publish libusb-1.0.0.dylib artifacts'
